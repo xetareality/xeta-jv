@@ -31,7 +31,7 @@ public class Launch implements PoolDependent {
 	/**
 	 * Resolve launch pool
 	 */
-	public TransactionData transfer(TransactionRequest tx, Boolean submitTx) {
+	public TransactionData resolve(TransactionRequest tx, Boolean submitTx) {
 		return Instruction.wrap(
 			MapBuilder.builder()
 				.put("function", "launch.resolve")
