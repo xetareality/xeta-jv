@@ -25,7 +25,7 @@ public class SimpleDemo {
 		// 1.
 		System.out.println("1. Generating keypair:");
 		final String[] keyPair = Crypto.generateKeyPair();
-		System.out.println("public key: [" + keyPair[0] + "], private key: [" + keyPair[1] + "]");
+		System.out.println("public key:  [" + keyPair[0] + "] - length " + keyPair[0].length() + "\nprivate key: [" + keyPair[1] + "] - length " + keyPair[1].length());
 		System.out.println();
 
 		// 2.

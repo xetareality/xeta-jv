@@ -1,7 +1,15 @@
 package xeta.library.crypto;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
+import org.bouncycastle.crypto.KeyGenerationParameters;
+import org.bouncycastle.crypto.generators.Ed25519KeyPairGenerator;
+import org.bouncycastle.crypto.params.Ed25519PrivateKeyParameters;
+import org.bouncycastle.crypto.params.Ed25519PublicKeyParameters;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import xeta.library.ExceptionWrappers;
 
 import java.math.BigInteger;
@@ -13,12 +21,25 @@ public class ED25519 {
 
 	private static final String ED_25519 = "Ed25519";
 
+	public static KeyPairBytes generateKeyPair() {
+		return ExceptionWrappers.wrapExceptions(() -> {
+			final Ed25519KeyPairGenerator keyPairGen = new Ed25519KeyPairGenerator();
+			keyPairGen.init(new KeyGenerationParameters(new SecureRandom(), 256));
+			final AsymmetricCipherKeyPair keyPair = keyPairGen.generateKeyPair();
+
+			final Ed25519PublicKeyParameters publicKey = (Ed25519PublicKeyParameters) keyPair.getPublic();
+			final Ed25519PrivateKeyParameters privateKey = (Ed25519PrivateKeyParameters) keyPair.getPrivate();
+
+			return new KeyPairBytes(publicKey.getEncoded(), privateKey.getEncoded());
+		});
+	}
+
 	public static byte[] randomPrivateKey() {
 		return randomPrivateKeyObject().getEncoded();
 	}
 	public static PrivateKey randomPrivateKeyObject() {
 		return ExceptionWrappers.wrapExceptions(() -> {
-			final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ED_25519);
+			final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ED_25519, new BouncyCastleProvider());
 			final KeyPair keyPair = keyPairGenerator.generateKeyPair();
 			return keyPair.getPrivate();
 		});
@@ -81,5 +102,12 @@ public class ED25519 {
 			final EdECPrivateKeySpec keySpec = new EdECPrivateKeySpec(paramSpec, serializedKey);
 			return keyFactory.generatePrivate(keySpec);
 		});
+	}
+
+	@Getter
+	@RequiredArgsConstructor
+	public static class KeyPairBytes {
+		private final byte[] publicKey;
+		private final byte[] privateKey;
 	}
 }
