@@ -16,8 +16,8 @@ public class Crypto {
 	}
 
 	public static String[] generateKeyPair() {
-		final String privateKey = Crypto.generatePrivate();
-		return new String[]{generatePublic(privateKey), privateKey};
+		final ED25519.KeyPairBytes pair = ED25519.generateKeyPair();
+		return new String[] {Base58.encode(pair.getPublicKey()), Base58.encode(pair.getPrivateKey())};
 	}
 
 	public static String sign(String message, String privateKey) {
