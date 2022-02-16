@@ -25,6 +25,7 @@ public class TransferTest {
 	public void create() {
 		final TransactionData transactionData = Transfer.create("8eVYQCDDXsMRaPpxgeUZDJZ6Kes454owbrjkgwV3Rmgs", "11111111111111111111111111111xeta", "5", "Ek7Na3CBuWBJtzXfTGoUXYfeXhH2NCVuuzkKQvSFiZvY", "for christmas", TransactionRequest.builder().build(), true);
 		assertNotNull(transactionData);
+		assertNull(transactionData.getError());
 	}
 	// hash HqkmEnCdR9U5dUek1LaGH3BMki61thMZkTkAbMkFG61P
 	//

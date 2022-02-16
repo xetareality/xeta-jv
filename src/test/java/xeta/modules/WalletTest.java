@@ -27,6 +27,7 @@ public class WalletTest {
 		assertNotNull(sign);
 		assertEquals("J7ZH7xcjDNzkvme88QgFrM3MStgxpaWYhdqLJhnNWqnh", sign.getHash());
 		assertEquals("4mKZ31GYCcauwdfHHjbpwQTd4xUMFocQQspgbQTHZQN1zLZjqVSNCjmKyQi75nMYs6HVirgG2hbEFGM2Ry9zXSUm", sign.getSignature());
+		assertNull(sign.getError());
 	}
 	// public
 	// GVen9LScAPCxzGS4UmuBeW56KZvKpHvUDD12155FSr8x
