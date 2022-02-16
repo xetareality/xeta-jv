@@ -10,8 +10,7 @@ import xeta.modules.models.TransactionRequest;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class AllowanceTest {
 
@@ -26,6 +25,7 @@ public class AllowanceTest {
 	public void update() {
 		final TransactionData data = Allowance.update("Ek7Na3CBuWBJtzXfTGoUXYfeXhH2NCVuuzkKQvSFiZvY", "11111111111111111111111111111xeta", "1", TransactionRequest.builder().build(), true);
 		assertNotNull(data);
+		assertNull(data.getError());
 	}
 
 	@Test

@@ -25,10 +25,7 @@ public class PoolTest {
 	public void create() {
 		final TransactionData transactionData = Pool.create("11111111111111111111111111111xeta", "auction", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, TransactionRequest.builder().build(), true);
 		assertNotNull(transactionData);
-	}
-
-	@Test
-	public void instance() {
+		assertNull(transactionData.getError());
 	}
 
 	@Test

@@ -21,5 +21,6 @@ public class ProfileTest {
 	public void update() {
 		final TransactionData update = Profile.update("shumykprofile", "test profile", null, null, null, "shumykcategory", TransactionRequest.builder().build(), true);
 		assertNotNull(update);
+		assertNull(update.getError());
 	}
 }

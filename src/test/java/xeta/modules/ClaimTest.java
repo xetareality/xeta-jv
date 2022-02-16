@@ -25,24 +25,28 @@ public class ClaimTest {
 	public void create() {
 		final TransactionData claim = Claim.create("Ek7Na3CBuWBJtzXfTGoUXYfeXhH2NCVuuzkKQvSFiZvY", "11111111111111111111111111111xeta", "1", null, null, null, null, null, null, null, null, TransactionRequest.builder().build(), true);
 		assertNotNull(claim);
+		assertNull(claim.getError());
 	}
 
 	@Test
 	public void update() {
 		final TransactionData update = Claim.update("3kediNKGd87VnZ77gSkA25Lhisxrz8nB8XKagmUck7gQ", "3", "5", null, null, null, "gifts", null, "yes", null, TransactionRequest.builder().build(), true);
 		assertNotNull(update);
+		assertNull(update.getError());
 	}
 
 	@Test
 	public void transfer() {
 		final TransactionData transfer = Claim.transfer("DrVxYSKtj69FjNVb9LNkpja8oBaLo8PFjLVcFBJ1KT2o", "Ctx9mNhtr62HtjukT2cvzaaqbp6BRyMsz7osz5UYCvaL", TransactionRequest.builder().build(), true);
 		assertNotNull(transfer);
+		assertNull(transfer.getError());
 	}
 
 	@Test
 	public void resolve() {
 		final TransactionData resolve = Claim.resolve("3kediNKGd87VnZ77gSkA25Lhisxrz8nB8XKagmUck7gQ", TransactionRequest.builder().build(), true);
 		assertNotNull(resolve);
+		assertNull(resolve.getError());
 	}
 
 	@Test
