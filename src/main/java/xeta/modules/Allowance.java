@@ -26,7 +26,7 @@ public class Allowance {
 				.put("function", "allowance.update")
 				.put("spender", spender)
 				.put("token", token)
-				.put("amount", GeneralUtil.amountOrNull(amount))
+				.put("amount", GeneralUtil.amount(amount))
 				.build(),
 			tx,
 			submitTx

@@ -33,6 +33,7 @@ public class Resource {
 				.put("fields", model.getFields())
 				.put("preview", model.getPreview())
 				.put("dev", Config.devString())
+				.put("identity", Config.identity)
 				.build()
 		);
 		final String rawResponse = HttpUtil.GET(Config.xetaInterface + "/read?" + parameters);
@@ -54,6 +55,7 @@ public class Resource {
 				.put("fields", model.getFields())
 				.put("preview", model.getPreview())
 				.put("dev", Config.devString())
+				.put("identity", Config.identity)
 				.build()
 		);
 		final String rawResponse = HttpUtil.GET(Config.xetaInterface + "/list?" + parameters);
@@ -86,7 +88,9 @@ public class Resource {
 			.put("asc", isNull(model.getAsc()) ? "acs" : model.getAsc() ? "asc" : "desc")
 			.put("limit", Integer.toString(calculatedLimit))
 			.put("preview", String.valueOf(model.getPreview()))
+			.put("extend", model.getExtend())
 			.put("dev", Config.devString())
+			.put("identity", Config.identity)
 			.build()
 		);
 		final String rawResponse = HttpUtil.GET(Config.xetaInterface + "/scan?" + parameters);

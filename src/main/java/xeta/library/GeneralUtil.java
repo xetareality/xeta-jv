@@ -14,12 +14,6 @@ import static java.util.Objects.isNull;
 public class GeneralUtil {
 
 	public static String amount(String amount) {
-		if (isNull(amount)) throw new IllegalArgumentException("parameter:amount");
-
-		final DecimalFormat format = new DecimalFormat("###.########");
-		return format.format(Double.parseDouble(amount));
-	}
-	public static String amountOrNull(String amount) {
 		if (isNull(amount)) return null;
 
 		final DecimalFormat format = new DecimalFormat("###.########");

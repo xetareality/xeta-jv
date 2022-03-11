@@ -27,7 +27,7 @@ public class Transfer {
 				.put("function", "transfer.create")
 				.put("to", to)
 				.put("token", token)
-				.put("amount", GeneralUtil.amountOrNull(amount))
+				.put("amount", GeneralUtil.amount(amount))
 				.put("from", from)
 				.put("message", message)
 				.build(),

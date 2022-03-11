@@ -27,8 +27,8 @@ public class Token {
 				.put("name", name)
 				.put("symbol", symbol)
 				.put("whole", whole)
-				.put("supply", GeneralUtil.amountOrNull(supply))
-				.put("reserve", GeneralUtil.amountOrNull(reserve))
+				.put("supply", GeneralUtil.amount(supply))
+				.put("reserve", GeneralUtil.amount(reserve))
 				.put("description", description)
 				.put("links", links)
 				.put("meta", meta)
@@ -77,7 +77,7 @@ public class Token {
 			MapBuilder.builder()
 				.put("function", "token.mint")
 				.put("token", token)
-				.put("amount", GeneralUtil.amountOrNull(amount))
+				.put("amount", GeneralUtil.amount(amount))
 				.build(),
 			tx,
 			submitTx

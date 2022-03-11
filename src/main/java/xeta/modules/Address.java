@@ -18,6 +18,7 @@ public class Address {
 			MapBuilder.builder()
 				.put("address", address)
 				.put("dev", Config.devString())
+				.put("identity", Config.identity)
 				.build()
 		);
 		return HttpUtil.GET(Config.xetaInterface + "/address?" + parameters);

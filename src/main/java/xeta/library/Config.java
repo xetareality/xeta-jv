@@ -9,6 +9,7 @@ public class Config {
 	public static String account = null;
 	public static String secret = null;
 	public static boolean dev = false;
+	public static String identity = null;
 	public static String xetaInterface = "https://interface.xetareality.com";
 	public static String network = "https://network.xetareality.com";
 	public static String xetaAddress = "11111111111111111111111111111xeta";
