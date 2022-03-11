@@ -15,6 +15,7 @@ public class Search {
 			MapBuilder.builder()
 				.put("query", query)
 				.put("dev", Config.devString())
+				.put("identity", Config.identity)
 				.build()
 		);
 		return HttpUtil.GET(Config.xetaInterface + "/search?" + parameters);

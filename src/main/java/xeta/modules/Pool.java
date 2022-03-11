@@ -23,7 +23,7 @@ public class Pool {
 	/**
 	 * Create pool
 	 */
-	public static TransactionData create(String token, String program, String name, String description, String mechanism,
+	public static TransactionData create(String token, String program, String name, String description, String type,
 										 String candidates, String rate, String percentage, String number, String expires,
 										 String answers, String meta, String minAmount, String maxAmount, String minTime,
 										 String maxTime, String transfersLimit, String claimsLimit, String tokenLimit,
@@ -36,7 +36,7 @@ public class Pool {
 				.put("program", program)
 				.put("name", name)
 				.put("description", description)
-				.put("mechanism", mechanism)
+				.put("type", type)
 				.put("candidates", candidates)
 				.put("rate", rate)
 				.put("percentage", percentage)
@@ -44,16 +44,16 @@ public class Pool {
 				.put("expires", expires)
 				.put("answers", answers)
 				.put("meta", meta)
-				.put("minAmount", GeneralUtil.amountOrNull(minAmount))
-				.put("maxAmount", GeneralUtil.amountOrNull(maxAmount))
+				.put("minAmount", GeneralUtil.amount(minAmount))
+				.put("maxAmount", GeneralUtil.amount(maxAmount))
 				.put("minTime", minTime)
 				.put("maxTime", maxTime)
 				.put("transfersLimit", transfersLimit)
 				.put("claimsLimit", claimsLimit)
-				.put("tokenLimit", GeneralUtil.amountOrNull(tokenLimit))
-				.put("xetaLimit", GeneralUtil.amountOrNull(xetaLimit))
-				.put("tokenTarget", GeneralUtil.amountOrNull(tokenTarget))
-				.put("xetaTarget", GeneralUtil.amountOrNull(xetaTarget))
+				.put("tokenLimit", GeneralUtil.amount(tokenLimit))
+				.put("xetaLimit", GeneralUtil.amount(xetaLimit))
+				.put("tokenTarget", GeneralUtil.amount(tokenTarget))
+				.put("xetaTarget", GeneralUtil.amount(xetaTarget))
 				.build(),
 			tx,
 			submitTx
@@ -68,39 +68,20 @@ public class Pool {
 		final PoolData pool = Pool.read(address);
 		if (isNull(pool)) return null;
 
-		final PoolDependent result;
-		switch (pool.getProgram()) {
-			case "auction":
-				result = new Auction(pool);
-				break;
-			case "launch":
-				result = new Lending(pool);
-				break;
-			case "lock":
-				result = new Lock(pool);
-				break;
-			case "loot":
-				result = new Loot(pool);
-				break;
-			case "lottery":
-				result = new Lottery(pool);
-				break;
-			case "royalty":
-				result = new Royalty(pool);
-				break;
-			case "staking":
-				result = new Staking(pool);
-				break;
-			case "swap":
-				result = new Swap(pool);
-				break;
-			case "vote":
-				result = new Vote(pool);
-				break;
-			default:
-				throw new RuntimeException("program:invalid");
-		}
-		return result;
+		return switch (pool.getProgram()) {
+			case "auction" -> new Auction(pool);
+			case "launch" -> new Launch(pool);
+			case "lending" -> new Lending(pool);
+			case "listing" -> new Listing(pool);
+			case "lock" -> new Lock(pool);
+			case "loot" -> new Loot(pool);
+			case "lottery" -> new Lottery(pool);
+			case "royalty" -> new Royalty(pool);
+			case "staking" -> new Staking(pool);
+			case "swap" -> new Swap(pool);
+			case "vote" -> new Vote(pool);
+			default -> throw new RuntimeException("program:invalid");
+		};
 	}
 
 
@@ -332,6 +313,26 @@ public class Pool {
 				.indexValue(program)
 				.sort("transfersCount")
 				.sortValue(transfersCount)
+				.keyValue(address)
+				.build(),
+			PoolData.class
+		);
+	}
+
+	/**
+	 * Scan pools by active program, sort by type
+	 */
+	public static List<PoolData> scanProgramType(String program, String type, String address) {
+		return scanProgramTransfersCount(ScanModel.builder().build(), program, type, address);
+	}
+	public static List<PoolData> scanProgramType(ScanModel model, String program, String type, String address) {
+		return Resource.scan(
+			model.toBuilder()
+				.type("pool")
+				.index("activeProgram")
+				.indexValue(program)
+				.sort("type")
+				.sortValue(type)
 				.keyValue(address)
 				.build(),
 			PoolData.class

@@ -16,4 +16,5 @@ public class ScanModel {
 	private final Boolean asc;
 	private final Integer limit;
 	private final Boolean preview;
+	private final String extend;
 }

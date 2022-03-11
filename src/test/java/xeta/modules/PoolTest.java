@@ -99,4 +99,10 @@ public class PoolTest {
 		final List<PoolData> pool = Pool.scanProgramTransfersCount("auction", null, null);
 		assertEquals(13, pool.size());
 	}
+
+	@Test
+	public void scanProgramType() {
+		final List<PoolData> pool = Pool.scanProgramType("auction", null, null);
+		assertEquals(13, pool.size());
+	}
 }
