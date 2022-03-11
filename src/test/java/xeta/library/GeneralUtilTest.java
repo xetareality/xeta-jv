@@ -19,5 +19,8 @@ public class GeneralUtilTest {
 		assertEquals("113390.31201709", GeneralUtil.amount("113390.312017091"));
 		assertEquals("8499999997.74", GeneralUtil.amount("8499999997.74"));
 		assertEquals("12345678912345.6", GeneralUtil.amount("12345678912345.6"));
+		assertEquals("999000000000000.00000001", GeneralUtil.amount("999000000000000.00000001"));
+		assertEquals("9990000000000000.00000001", GeneralUtil.amount("9990000000000000.00000001"));
+		assertEquals("999000000000000", GeneralUtil.amount("999000000000000.000000001"));
 	}
 }

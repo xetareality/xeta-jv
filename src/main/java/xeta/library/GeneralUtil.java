@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +18,8 @@ public class GeneralUtil {
 		if (isNull(amount)) return null;
 
 		final DecimalFormat format = new DecimalFormat("###.########");
-		return format.format(Double.parseDouble(amount));
+		final BigDecimal bigDecimal = new BigDecimal(amount);
+		return format.format(bigDecimal);
 	}
 
 	public static String toJson(Object object) {
