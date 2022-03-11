@@ -24,7 +24,7 @@ public class TokenTest {
 
 	@Test
 	public void create() {
-		final TransactionData transactionData = Token.create("testXeta", "TEST", "100000", null, null, null, null, null, null, null, null, null, null, null, null, TransactionRequest.builder().build(), true);
+		final TransactionData transactionData = Token.create("testXeta", "TEST", "999000000000000.00000001", null, null, null, null, null, null, null, null, null, null, null, null, TransactionRequest.builder().build(), true);
 		assertNotNull(transactionData);
 		assertNull(transactionData.getError());
 	}
